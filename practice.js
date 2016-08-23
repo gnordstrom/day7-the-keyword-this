@@ -2,18 +2,22 @@
   // 1) What is the purpose of the 'this keyword'?
 
       //Answer
+      // To avoid repetition and to allow the variable to change based upon the object that it's referencing.
 
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
       //Answer
+      // In order: Explicit bindings, Implicit binding, Default/Window Binding, and New Binding.
 
   // 3) What is the difference between call and apply?
 
       //Answer
+      // The only difference is in the supplied parameters. If given an array, use apply. If given specific parameters, use call.
 
   // 4) What does .bind do?
 
       //Answer
+      // It 'binds' or connects whatever I'm binding to a supplied object.
 
 
 //Next Problem
@@ -24,9 +28,17 @@
   //getUsername --> which is a function that returns the current object's username property. *Don't use 'user' instead use the 'this' keyword*
 
     //Code Here
+var user = {
+  username: 'gnordstrom',
+  email: 'gus@aol.com',
+  getUsername: function(){
+    return this.username;
+  }
+};
+
 
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
-
+user.getUsername();
 
 //Next Problem
 
@@ -34,6 +46,15 @@
 // Write the function definitions which will make the following function invocations function properly.
 
   //Function Invocations Here
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.moveCar = function() {
+    this.move = 0;
+    return this.move += 10;
+  };
+}
 
 var prius = new Car('Toyota', 'Prius', 2011);
 var mustang = new Car('Ford', 'Mustang', 2013);
@@ -55,6 +76,7 @@ var getYear = function(){
 
 //Note(no tests)
   //Code Here
+getYear.call(prius);
 
 
 //New Problem
@@ -69,14 +91,16 @@ var getMyUsername = function() {
  return this.username;
 };
 
-var userName = getMyUsername(); //Fix this
+var userName = getMyUsername.bind(myUser)(); //Fix this
 
-//Above you're given an object, a function, and a setTimeout invocation. After 5 seconds, what will the getUsername function return?
+//Above you're given an object, and function. What will the getUsername function return?
 //Note(no tests)
   //Answer Here
+  // It will return undefined before we change it using bind
 
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
   //Answer Here
+  // The global root variable / window
 
 //Fix the getMyUsername invocation so that userName will be equal to 'iliketurtles'.
